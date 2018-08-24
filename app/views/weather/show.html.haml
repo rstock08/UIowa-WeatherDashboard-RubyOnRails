@@ -1,0 +1,105 @@
+- owmChecked = @owm == '1' ? true : false
+- dsChecked = @ds == '1' ? true : false
+- wuChecked = @wu == '1' ? true : false
+
+= form_tag weather_search_path, method: :get do
+    = label :searched_city, :city_name, 'City: '
+    = text_field :searched_city, 'city_name'
+    = submit_tag 'Search'
+%br
+= form_tag weather_show_path, method: :get do
+    = check_box :source, 'openweathermap', :checked => owmChecked
+    OpenWeatherMap 
+    = check_box :source, 'darksky', :checked => dsChecked
+    DarkSky 
+    = check_box :source, 'weatherunderground', :checked => wuChecked
+    WeatherUnderground 
+    = submit_tag 'Refresh', :name=>'city['+@id.to_s+']['+@city.to_s+']'
+
+-if @current_user&&!@saved_location
+    = form_tag weather_locations_path+'?city_name='+@city+'&city_id='+@id, method: :post do
+        = submit_tag 'Add to saved locations'
+-elsif @current_user
+    %h2 Location Saved
+
+%h2 Current Weather for #@city
+%table{:id => "currentWeather", :class => "container"}
+    %thead
+        %tr
+            -@headings.each do |heading|
+                %th=heading
+            %th Consensus
+    %tbody
+        %tr
+            - @weather.each do |source|
+                %td 
+                    =image_tag source["current"]["icon"]
+                    %h3=source["current"]["temperature"].to_s + " °F"
+                    %h4="Humidity: "+source["current"]["humidity"].to_s
+                    %h4="Wind: "+source["current"]["wind"].to_s+" mph"
+            %td 
+                %h4{:class => WeatherController.consensus_class(@consensus["current"]["consensus"])}=@consensus["current"]["consensus"].to_s + "%"
+                %h3=@consensus["current"]["temperature"].to_s + " °F"
+                %h4="Humidity: "+@consensus["current"]["humidity"].to_s
+                %h4="Wind: "+@consensus["current"]["wind"].to_s+" mph"
+                    
+%h2 Daily Forecast
+%table{:id => "dailyWeather", :class => "container"}
+    %thead
+        %tr
+            %th
+            -@headings.each do |heading|
+                %th=heading
+            %th Consensus
+    %tbody
+        -@days.each do |day|
+            %tr
+                %td=day
+                - @weather.each do |source|
+                    %td 
+                        %div.weather_main
+                            =image_tag source["daily"][day]["icon"]
+                            %p="H: "+source["daily"][day]["high"].to_s + " °F    L: "+source["daily"][day]["low"].to_s + " °F"
+                        %div.weather_details
+                            %p="Precipitation: "+source["daily"][day]["precipitation"].to_s + " in"
+                            %p="Humidity: "+source["daily"][day]["humidity"].to_s
+                            %p="Wind: "+source["daily"][day]["wind"].to_s+" mph"
+                %td 
+                    %div.weather_main
+                        %h4{:class => WeatherController.consensus_class(@consensus["daily"][day]["consensus"])}=@consensus["daily"][day]["consensus"].to_s + "%"
+                        %p="H: "+@consensus["daily"][day]["high"].to_s + " °F    L: "+@consensus["daily"][day]["low"].to_s + " °F"
+                    %div.weather_details
+                        %p="Precipitation: "+@consensus["daily"][day]["precipitation"].to_s + " in"
+                        %p="Humidity: "+@consensus["daily"][day]["humidity"].to_s
+                        %p="Wind: "+@consensus["daily"][day]["wind"].to_s+" mph"
+                        
+%h2= "Tri-hourly Forecast For Today"
+%table{:id => "hourlyWeather", :class => "container"}
+    %thead
+        %tr
+            %th
+            -@headings.each do |heading|
+                %th=heading
+            %th Consensus
+    %tbody
+        -@hours.each do |hour|
+            %tr
+                %td=hour
+                - @weather.each do |source|
+                    %td 
+                        %div.weather_main
+                            =image_tag source["hourly"][hour]["icon"]
+                            %p=source["hourly"][hour]["temperature"].to_s + " °F"
+                        %div.weather_details
+                            %p="Precipitation: "+source["hourly"][hour]["precipitation"].round(2).to_s + " in"
+                            %p="Humidity: "+source["hourly"][hour]["humidity"].to_s
+                            %p="Wind: "+source["hourly"][hour]["wind"].to_s+" mph"
+                %td
+                    %div.weather_main
+                        %h4{:class => WeatherController.consensus_class(@consensus["hourly"][hour]["consensus"])}=@consensus["hourly"][hour]["consensus"].to_s + "%"
+                        %p=@consensus["hourly"][hour]["temperature"].to_s + " °F"
+                    %div.weather_details
+                        %p="Precipitation: "+@consensus["hourly"][hour]["precipitation"].to_s + " in"
+                        %p="Humidity: "+@consensus["hourly"][hour]["humidity"].to_s
+                        %p="Wind: "+@consensus["hourly"][hour]["wind"].to_s+" mph"
+

@@ -1,0 +1,70 @@
+%h1 Recent Source Accuracy
+%table{:id => "recentSourceAccuracy",  :class => "container"}
+    %tbody
+        -@recentAccuracy.each do |source|
+            %tr
+                %td=source["name"]
+                %td
+                    %h3=source["accuracy"].to_s + '%'
+
+%h1 Source Accuracy For Past 10 Days
+=line_chart @accuracyOverTime, curve: false, xtitle: "Days Ago", ytitle: "Percent Accuracy"
+
+%h1#sourceMetrics User Source Ratings
+
+%table{:id => "sourceAvgRatings", :class => "container"}
+    %thead
+        %tr
+            %th Source
+            %th Avg User Rating
+    %tbody
+        -@avgRatings.each do |source|
+            %tr
+                %td=source["name"]
+                %td
+                    %h3=source["rating"].to_f.round(2)
+
+-if @current_user
+    %h1 Your Source Preferences
+    #sourceRankingForm
+        =form_tag metrics_rank_path, method: :post do
+            %table{:id => "sourceRankings", :class => "rankingsForm"}
+                %thead
+                    %tr
+                        %th 1
+                        %th
+                        %th 2
+                        %th
+                        %th 3
+                %tbody
+                    %tr
+                        %td= text_field :ranking, :first, :value=> @sourceRankings[0].to_s, :class=>"rankedSource", :readonly => true
+                        %td
+                            =button_tag '<->',:type=>'button',:id=>'arrow1'
+                        %td= text_field :ranking, :second, :value=> @sourceRankings[1].to_s, :class=>"rankedSource", :readonly => true
+                        %td
+                            =button_tag '<->',:type =>'button',:id =>'arrow2'
+                        %td= text_field :ranking, :third, :value=> @sourceRankings[2].to_s, :class=>"rankedSource", :readonly => true
+        
+            =submit_tag 'Update', :id => "updateButton"
+            
+    =form_tag metrics_rate_path, method: :post do
+        %table{:id => "sourceRatings"}
+            %thead
+                %tr
+                    %th Source
+                    %th 
+                        Rating
+                        %br
+                        -for i in 1..5
+                            %p.ratingNumber= i.to_s
+            %tbody
+                -SOURCENAMES.each do |source|
+                    %tr
+                        %td=source
+                        %td
+                            -for i in 1..5
+                                -checked = @currentRatings[source]==i
+                                =radio_button "rating", source, i.to_s, :checked=>checked
+                    
+        =submit_tag 'Update Ratings', :id => "updateRatingsButton"

@@ -1,0 +1,41 @@
+-@weather.each do |city|
+    %h1= "Weather for "+city["city"]
+    -if city["current"]
+        %h2 Current
+        %h3
+            =city["current"]["temperature"].to_s + " °F"
+            ="   Humidity: "+city["current"]["humidity"].to_s
+            ="   Wind: "+city["current"]["wind"].to_s+" mph"
+
+    -if !@days.empty?          
+        %h2 Daily
+        %table#dailyWeather
+            %tbody
+                %tr
+                    -@days.each do |day|
+                        %td
+                            %h3=day
+                    %tr
+                        -@days.each do |day|
+                            %td 
+                                %p="H: "+city["daily"][day]["high"].to_s + " °F    "
+                                %p="L: "+city["daily"][day]["low"].to_s + " °F"
+                                %p="Precipitation: "+city["daily"][day]["precipitation"].to_s + " in"
+                                %p="Humidity: "+city["daily"][day]["humidity"].to_s
+                                %p="Wind: "+city["daily"][day]["wind"].to_s+" mph"
+
+    -if !@hours.empty?                        
+        %h2= "Tri-hourly Forecast For Today"
+        %table#hourlyWeather
+            %tbody
+                %tr
+                    -@hours.each do |hour|
+                        %td
+                            %h3=hour
+                %tr
+                    -@hours.each do |hour|
+                        %td 
+                            %p=city["hourly"][hour]["temperature"].to_s + " °F"
+                            %p="Precipitation: "+city["hourly"][hour]["precipitation"].round(2).to_s + " in"
+                            %p="Humidity: "+city["hourly"][hour]["humidity"].to_s
+                            %p="Wind: "+city["hourly"][hour]["wind"].to_s+" mph"

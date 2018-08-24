@@ -1,0 +1,11 @@
+user1:
+    id: 1
+    email: me@mail.com
+    session_token: 1
+    user_id: aaaaaaa
+    source_1: 0
+    source_2: 1
+    source_3: 2
+    darksky: 1
+    openweathermap: 2
+    weatherunderground: 3

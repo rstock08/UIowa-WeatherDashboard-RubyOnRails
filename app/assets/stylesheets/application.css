@@ -1,0 +1,348 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ 
+a {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.42em;
+    color:#A7A1AE;
+    
+}
+.title{
+    padding-top: 25px;
+    font-size: 50px;
+    color: #333;
+    font-style: oblique;
+} 
+
+body{
+    background-color: white; 
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+ 
+.header{
+    background-image: url("BannerClouds.gif");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    width: 100%;
+    height: 200px;
+    display: inline-block;
+}
+
+.header_links{
+    display: inline-block;
+}
+
+.header_link, .active_header_link{
+    display: inline-block;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 20px;
+}
+
+.active_header_link{
+    background-color: #6f84a8;
+}
+
+.good_consensus{
+    color: green;
+}
+
+.bad_consensus{
+    color: red;
+}
+
+.login_form, .active_login_form{
+    float: right;
+    padding: 20px 24px;
+}
+
+.active_login_form{
+    background-color: #6f84a8;
+}
+
+.weather_search_form{
+    /* to-do: Center search form in the middle of the screen */
+}
+
+#signupLogin, #logout{
+    font-size: 20px;
+}
+
+#currentWeather, #dailyWeather, #hourlyWeather, #currentSavedWeather{
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid Black;
+}
+
+#currentWeather th, #currentWeather td, #dailyWeather th, #dailyWeather td,
+#hourlyWeather th, #hourlyWeather td{
+    border: 1px solid Black;
+    vertical-align: middle;
+    padding: 15px;
+}
+
+#currentSavedWeather th, #currentSavedWeather td{
+    border: 1px solid Black;
+    vertical-align: middle;
+}
+
+#currentWeather p, #dailyWeather p, #hourlyWeather p{
+    font-size: small;
+}
+
+.weather_details, .weather_main{
+    display: inline-block;
+    padding: 3px;
+}
+
+.city_link, .saved_table_title{
+    display: inline-block;
+    font-size: large;
+}
+
+.city_delete{
+    display: inline-block;
+    float: right;
+}
+
+#sourceRankingForm{
+    display:table-column;
+}
+
+.ratingNumber{
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline-block
+}
+
+#sourceAvgRatings{
+    text-align: center;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: relative;
+}
+
+
+
+li a {
+    display: inline;
+    color: white;
+    text-align: center;
+    padding: 20px 24px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #e8e8e8;
+}
+/*
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 25px;
+}
+
+tr:hover{background-color:#f5f5f5}
+*/
+/*---------------------------------------------------------------*/
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.42em;
+  color:#A7A1AE;
+  background-color:#1F2739;
+}
+
+h1 {
+  font-size:3em; 
+  font-weight: 300;
+  line-height:1em;
+  text-align: center;
+  color: #4DC3FA;
+}
+
+h2 {
+  font-size:1em; 
+  font-weight: 300;
+  text-align: center;
+  display: block;
+  line-height:1em;
+  padding-bottom: 2em;
+  color: #FB667A;
+}
+
+h2 a {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FB667A;
+  text-decoration: none;
+}
+
+.blue { color: #185875; }
+.yellow { color: #FFF842; }
+
+.container th h1 {
+	  font-weight: bold;
+	  font-size: 1em;
+      text-align: left;
+      color: #185875;
+}
+
+.container td {
+	  font-weight: normal;
+	  font-size: 1em;
+  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+	   -moz-box-shadow: 0 2px 2px -2px #0E1119;
+	        box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.container {
+	  text-align: left;
+	  overflow: hidden;
+	  width: 80%;
+	  margin: 0 auto;
+      display: table;
+      padding: 0 0 8em 0;
+}
+
+.container td, .container th {
+	  padding-bottom: 2%;
+	  padding-top: 2%;
+      padding-left:2%;  
+}
+
+/* Background-color of the odd rows */
+.container tr:nth-child(odd) {
+	  background-color: #323C50;
+}
+
+/* Background-color of the even rows */
+.container tr:nth-child(even) {
+	  background-color: #2C3446;
+}
+
+.container th {
+	  background-color: #1F2739;
+}
+
+.container td:first-child { color: #FB667A; }
+
+.container tr:hover {
+   background-color: #464A52;
+-webkit-box-shadow: 0 6px 6px -6px #0E1119;
+	   -moz-box-shadow: 0 6px 6px -6px #0E1119;
+	        box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.container td:hover {
+  background-color: #FFF842;
+  color: #403E10;
+  font-weight: bold;
+  
+  box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+  
+  transition-delay: 0s;
+	  transition-duration: 0.4s;
+	  transition-property: all;
+  transition-timing-function: line;
+}
+
+@media (max-width: 800px) {
+.container td:nth-child(4),
+.container th:nth-child(4) { display: none; }
+}
+
+
+#chart-1{
+    background-color: #c3cce5;
+}
+
+.rankingsForm{
+    background-color: #c3cce5;
+    width: 100%;
+}
+
+#sourceRatings{
+    background-color: #c3cce5;
+    font-weight: bold;
+	font-size: 1em;
+    text-align: left;
+    color: #185875;
+    width: 100%;
+}
+
+#updateButton, #updateRatingsButton{
+    width: 100%;
+}
+#create_notification_button{
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%
+}
+#notifications_form{
+    margin-left: 30%;
+    margin-right: 30%
+}
+/*-------------------------------------
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+*/

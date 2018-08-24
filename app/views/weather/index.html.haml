@@ -1,0 +1,8 @@
+<link rel="stylesheet" type="app/assets/stylesheets" href="forms.css">
+
+= form_tag weather_search_path, method: :get do
+
+    = label :searched_city, :city_name, 'City: '
+    = text_field :searched_city, 'city_name'
+    = submit_tag 'Search'
+  

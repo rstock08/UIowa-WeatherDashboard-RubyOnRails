@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %title Weather Dashboard
+    = stylesheet_link_tag 'application', 'media' => 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+    %div.header
+      %h1.title Weather Dashboard
+    %ul
+      %li
+        =link_to("Metrics", metrics_path,:class=>ApplicationController.link_class("metrics"))
+        =link_to("Search Weather", weather_path,:class=>ApplicationController.link_class("weather"))
+        =link_to("My Weather", weather_locations_path,:class=>ApplicationController.link_class("weather_locations"))
+        =link_to("Notifications", notifications_path,:class=>ApplicationController.link_class("notifications"))
+      
+        -if !@current_user
+          = link_to 'Login', login_path, method: :get, :id => 'signupLogin'
+        -else
+          = link_to 'Change Password', change_password_path, method: :get, :id => 'change_pwd'
+          = link_to 'Log Out', logout_path, method: :delete, :id => 'logout'
+
+    
+    
+    #main
+      - if flash[:notice]
+        #notice.message= flash[:notice]
+      - elsif flash[:warning]
+        #warning.message= flash[:warning]
+
+    = yield

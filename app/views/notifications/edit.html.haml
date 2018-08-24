@@ -1,0 +1,31 @@
+%h1 New Notification
+= form_tag notification_path(@notification), method: :patch do
+    %h2 Time
+    %select{:name => "time"}
+        -for i in 1..12
+            -if @notification["time"]%12==i
+                %option{:value => i, :selected => true}=i 
+            - else
+                %option{:value => i}=i
+    %select{:name => "ampm"}
+        %option{:value => "AM", :selected => @notification["time"]/12.to_f<=1} AM
+        %option{:value => "PM", :selected => @notification["time"].to_f/12>1} PM
+    %h2 Cities
+    -@cities.each do |city|
+        -checked = @notification["city_names"].split("<br>").include?(city.city_name)
+        =check_box "cities", city.city_id.to_s, {:checked => checked}
+        =city["city_name"]
+        %br
+    %h2 Information
+    =check_box "information", "current", {:checked => @notification[:current]==1}
+    Current
+    =check_box "information", "daily", {:checked => @notification[:daily]==1}
+    Daily
+    =check_box "information", "hourly", {:checked => @notification[:hourly]==1}
+    Hourly
+    %h2 Source
+    =radio_button "type", "type", 0, {:checked => @notification[:source]==0}
+    Consensus
+    =radio_button "type", "type",  1, {:checked => @notification[:source]==1}
+    Favorite Source
+    =submit_tag 'Save' 

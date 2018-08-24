@@ -1,0 +1,31 @@
+
+-if @current_user!=nil
+    %h1= 'Saved Weather for '+@current_user.user_id
+    -@cities.each do |city|
+        %h2.saved_table_title='Current Weather for '
+        .city_link=link_to city["name"], weather_show_path+URI.encode('?source[openweathermap]=1&source[darksky]=1&source[weatherunderground]=1&city['+city["id"]+']['+city["name"]+']=Refresh')
+        %div.city_delete
+            = form_tag weather_location_path({:id=>city["id"]}), method: :delete do
+                = submit_tag 'Delete Location'
+        %table{:id => "currentSavedWeather", :class => "container"}
+            %thead
+                %tr
+                    -@headings.each do |heading|
+                        %th=heading
+                    %th Consensus
+            %tbody
+                %tr
+                    - city["weather"].each do |source|
+                        %td 
+                            =image_tag source["current"]["icon"]
+                            %p=source["current"]["temperature"].to_s + " °F"
+                            %p="Humidity: "+source["current"]["humidity"].to_s
+                            %p="Wind: "+source["current"]["wind"].to_s+" mph"
+                    %td 
+                        - consensus = city["consensus"]
+                        %h4{:class => WeatherController.consensus_class(consensus["current"]["consensus"])}=consensus["current"]["consensus"].to_s + "%"
+                        %p=consensus["current"]["temperature"].to_s + " °F"
+                        %p="Humidity: "+consensus["current"]["humidity"].to_s
+                        %p="Wind: "+consensus["current"]["wind"].to_s+" mph"
+-else
+    %h1 Please sign in to see saved weather locations.

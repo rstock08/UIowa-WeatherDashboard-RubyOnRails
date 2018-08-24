@@ -1,0 +1,20 @@
+%h1 Sign-up
+
+= form_tag users_path do
+
+  = label :user, :user_id, 'User ID'
+  = text_field :user, 'user_id', :id => 'signupUser'
+
+  = label :user, :email, 'E-mail'
+  = text_field :user, 'email', :id => 'signupEmail'
+  
+  = label :user, :password, 'Password'
+  = password_field :user, 'password', :id => 'password'
+  
+  = label :password_confirmation, 'Confirm Password'
+  = password_field :user, 'password_confirmation', :id => 'passwordConfirmation'
+  
+  = label :user, :user_cell, 'Cell Phone'
+  = text_field :user, 'user_cell', :id => 'cell'
+
+  = submit_tag 'Create my Account', :id => 'signupCreate'

@@ -1,0 +1,17 @@
+= form_tag weather_search_path, method: :get do
+
+    = label :searched_city, :city_name, 'City: '
+    = text_field :searched_city, 'city_name'
+    = submit_tag 'Search'
+%br
+= form_tag weather_show_path, method: :get do
+    = check_box :source, 'openweathermap', :checked => true
+    OpenWeatherMap 
+    = check_box :source, 'darksky', :checked => true
+    DarkSky
+    = check_box :source, 'weatherunderground', :checked => true
+    WeatherUnderground
+    %br
+    - @cities.each do |city|
+        = submit_tag city[:name], :name=>'city['+city[:id]+']['+city[:name]+']'
+        %br

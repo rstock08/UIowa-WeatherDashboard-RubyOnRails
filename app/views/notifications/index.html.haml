@@ -1,0 +1,23 @@
+-if @current_user
+    %h1 Your Notifications
+    =button_to  'Create new Notification', new_notification_path, method: :get, :id => "create_notification_button"
+    %table{:id => "notifications", :class => "container"}
+        %thead
+            %tr
+                %th Time
+                %th Cities
+                %th Information
+                %th Sources
+                %th Edit
+        %tbody
+            -@notifications.each do |notification|
+                %tr
+                    %td=notification["time"]
+                    %td=notification["cities"].html_safe
+                    %td=notification["information"]
+                    %td=notification["sources"]
+                    %td.notes
+                        =link_to 'Edit', edit_notification_path(notification)
+                        =link_to 'Delete', notification_path(notification), method: :delete
+-else
+    %h2 Please log in to view notification settings.

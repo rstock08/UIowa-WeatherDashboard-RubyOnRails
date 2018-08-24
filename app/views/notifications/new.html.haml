@@ -1,0 +1,28 @@
+%h1 New Notification
+= form_tag notifications_path, method: :post do
+    %h2 Time
+    %select{:name => "time"}
+        -for i in 1..12
+            %option{:value => i}=i
+    %select{:name => "ampm"}
+        %option{:value => "AM"} AM
+        %option{:value => "PM"} PM
+    UTC
+    %h2 Cities
+    -@cities.each do |city|
+        =check_box "cities", city.city_id.to_s, {:checked => true}
+        =city["city_name"]
+        %br
+    %h2 Information
+    =check_box "information", "current"
+    Current
+    =check_box "information", "daily"
+    Daily
+    =check_box "information", "hourly"
+    Hourly
+    %h2 Source
+    =radio_button "type", "type", 0
+    Consensus
+    =radio_button "type", "type",  1
+    Favorite Source
+    =submit_tag 'Create' 
