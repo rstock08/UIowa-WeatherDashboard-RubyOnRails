@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-    default from: "fose.team1@gmail.com"
+    default from: "xxx"
     
     def sample_email(email, password)
         @password = password
@@ -26,9 +26,9 @@ class UserMailer < ApplicationMailer
     def text_notification(cell, weather)
         number_to_send_to = "+1#{cell}"
         
-        twilio_sid = "AC1a6dc75e16b19ec6bb91125bfd25fbcf" # For simplicity left these not as environmental variables!!!
-        twilio_token = "c485d958cf0dc14f3745d9594626c811"
-        twilio_phone_number = "+15635945927"
+        twilio_sid = "xxx" # For simplicity left these not as environmental variables!!!
+        twilio_token = "xxx"
+        twilio_phone_number = "xxx"
         @client = Twilio::REST::Client.new(twilio_sid, twilio_token)
         
         @client.messages.create(
@@ -41,9 +41,9 @@ class UserMailer < ApplicationMailer
     def welcome_text(user_id, cell)
         number_to_send_to =  "+1#{cell}"
         
-        twilio_sid = "AC1a6dc75e16b19ec6bb91125bfd25fbcf" # For simplicity left these not as environmental variables!!!
-        twilio_token = "c485d958cf0dc14f3745d9594626c811"
-        twilio_phone_number = "+15635945927"
+        twilio_sid = "xxx" # For simplicity left these not as environmental variables!!!
+        twilio_token = "xxx"
+        twilio_phone_number = "xxx"
         @client = Twilio::REST::Client.new(twilio_sid, twilio_token)
         
         @client.messages.create(
