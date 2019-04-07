@@ -1,1 +1,1 @@
-# WeatherDashboard-RubyOnRails
+# UIowa Weather Dashboard Project - RubyOnRails
